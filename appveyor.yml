@@ -1,14 +1,14 @@
 version: '4.5.4-TUNNELVISION+AppVeyor.{build}'
 os: Windows Server 2012
 build_script:
-  - ps : |
-        get-childitem "env:"
   - mvn compile -q --batch-mode 
 test_script:
-  - mvn install -q --batch-mode
-after_test:
+  - 
   - ps : | 
+        mvn install -q --batch-mode
+        $ret = $LASTEXITCODE
         $url = "https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)"
-        $xmlPath = join-path "C:\projects\antlr4-1\tool" target\surefire-reports
+        $xmlPath = join-path $env:APPVEYOR_BUILD_FOLDER tool\target\surefire-reports
         $wc = New-Object 'System.Net.WebClient'
         get-childitem $xmlPath | % { $wc.UploadFile($url, $_)}
+        exit $ret
