@@ -1,5 +1,7 @@
 version: '4.5.4-TUNNELVISION+AppVeyor.{build}'
 os: Windows Server 2012
+environment:
+    JDK_SOURCE_ROOT : C:\Program Files\Java\jdk1.8.0
 build_script:
   - mvn compile -q --batch-mode 
 test_script:
