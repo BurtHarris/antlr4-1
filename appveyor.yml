@@ -3,12 +3,9 @@ os: Windows Server 2012
 build_script:
   - mvn compile -q --batch-mode 
 test_script:
-  - 
+  - mvn install -q --batch-mode
   - ps : | 
-        mvn install -q --batch-mode
-        $ret = $LASTEXITCODE
         $url = "https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)"
         $xmlPath = join-path $env:APPVEYOR_BUILD_FOLDER tool\target\surefire-reports
         $wc = New-Object 'System.Net.WebClient'
         get-childitem $xmlPath | % { $wc.UploadFile($url, $_)}
-        exit $ret
