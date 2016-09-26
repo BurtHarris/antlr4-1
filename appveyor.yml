@@ -1,0 +1,9 @@
+version: '4.5.4-TUNNELVISION+AppVeyor.{build}'
+os: Windows Server 2012
+build_script:
+  - mvn compile -q --batch-mode 
+test_script:
+  - mvn install -q --batch-mode
+build:
+  verbosity: minimal
+  
