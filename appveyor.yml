@@ -11,4 +11,3 @@ test_script:
         $xmlPath = join-path "C:\projects\antlr4-1\tool" target\surefire-reports
         $wc = New-Object 'System.Net.WebClient'
         get-childitem $xmlPath | % { $wc.UploadFile($url, $_)}
-
